@@ -1,67 +1,18 @@
-package org.src.lists;
+package org.src.lists.practices;
+
+import org.src.lists.dto.Student;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-class Student {
-    private Integer id;
-    private String name;
-    private Date dateOfBirth;
-
-    public Student(Integer id, String name, Date dateOfBirth) {
-        this.id = id;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Student student)) return false;
-        return getId().equals(student.getId()) && getName().equals(student.getName()) && getDateOfBirth().equals(student.getDateOfBirth());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getDateOfBirth());
-    }
-
-    @Override
-    public String toString() {
-        return "\nStudent{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                '}';
-    }
-}
-
 /**
  * Lists101 - Practice ground for lists
+ * <p>
+ * Contains:
+ * <p>
+ * 1. List creation
+ * 2. List sorting (with primitive types)
+ * 3. List sorting (with objects)
  */
 public class Lists101 {
 
@@ -197,17 +148,19 @@ public class Lists101 {
         System.out.println("listSortDesc ----- " + listSortDesc(3, 4, 2, 1, 6, 5, 4, 9, 8, 7, 2, 10));
         System.out.println("studentListSortAsc ----- " + studentListSortAsc(
                 new Student(100, "John", new Date((long) 1114573964 * 1000)),
-                new Student(2, "John", new Date((long) 1481664991 * 1000)),
-                new Student(54, "John", new Date((long) 1256763291 * 1000)),
-                new Student(3, "John", new Date((long) 1597413169 * 1000)),
-                new Student(7, "John", new Date((long) 1625256055 * 1000))
+                new Student(2, "Hank", new Date((long) 1481664991 * 1000)),
+                new Student(54, "Jean", new Date((long) 1256763291 * 1000)),
+                new Student(3, "Paul", new Date((long) 1597413169 * 1000)),
+                new Student(76, "Sam", new Date((long) 1625256055 * 1000)),
+                new Student(7, "Rose", new Date((long) 1625256055 * 1000))
         ));
         System.out.println("studentListSortDesc ----- " + studentListSortDesc(
                 new Student(100, "John", new Date((long) 1114573964 * 1000)),
-                new Student(2, "John", new Date((long) 1481664991 * 1000)),
-                new Student(54, "John", new Date((long) 1256763291 * 1000)),
-                new Student(3, "John", new Date((long) 1597413169 * 1000)),
-                new Student(7, "John", new Date((long) 1625256055 * 1000))
+                new Student(2, "Hank", new Date((long) 1481664991 * 1000)),
+                new Student(54, "Jean", new Date((long) 1256763291 * 1000)),
+                new Student(3, "Paul", new Date((long) 1597413169 * 1000)),
+                new Student(7, "Rose", new Date((long) 1625256055 * 1000)),
+                new Student(76, "Sam", new Date((long) 1625256055 * 1000))
         ));
     }
 }
