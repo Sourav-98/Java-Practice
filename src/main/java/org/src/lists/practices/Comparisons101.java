@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 public class Comparisons101 {
 
     /**
+     * Comparables
+     * <p>
+     * <p>
      * List sorting on primitive Integer type data.
      * <p>
      * This works because Integer implements Comparable.
@@ -26,9 +29,12 @@ public class Comparisons101 {
     }
 
     /**
-     * List sorting on primitive Integer type data.
+     * Comparables
      * <p>
-     * This works because Integer implements Comparable.
+     * <p>
+     * List sorting on primitive String type data.
+     * <p>
+     * This works because String implements Comparable.
      *
      * @param items
      * @return
@@ -39,6 +45,16 @@ public class Comparisons101 {
         return myList;
     }
 
+    /**
+     * Comparables
+     * <p>
+     * <p>
+     * This will not work as Teacher does not implement Comparable.
+     *
+     * @param teachers
+     * @return
+     * @throws ClassCastException
+     */
     static List<Teacher> teachersListSort(Teacher... teachers) throws ClassCastException {
         List<Teacher> myTeachers = new ArrayList<>(Arrays.asList(teachers));
         // compilation error here -> since Teacher does not implement compareTo() from Comparable, it throws a compilation error
@@ -48,17 +64,47 @@ public class Comparisons101 {
         return myTeachers;
     }
 
+    /**
+     * Comparables
+     * <p>
+     * <p>
+     * ComparableTeacher implements Comparable. Hence, sorting using sort() works.
+     *
+     * @param teachers
+     * @return
+     */
     static List<ComparableTeacher> comparableTeachersListSortReversed(ComparableTeacher... teachers) {
         List<ComparableTeacher> myTeachers = new ArrayList<>(Arrays.asList(teachers));
         // approach 1
-        myTeachers.sort(Comparator.comparing((a) -> a));
+        myTeachers.sort(Collections.reverseOrder());
         // approach 2
-        myTeachers = myTeachers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        Collections.sort(myTeachers, Collections.reverseOrder());
+        // approach 3 - this by default sorts the objects, based on the dateOfBirth field, defined in compareTo()
+        myTeachers = myTeachers.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
         return myTeachers;
     }
 
+    /**
+     * Comparators
+     *
+     * @param teachers
+     * @return
+     */
+    static List<Teacher> teachersListSortCustomComparator(Teacher... teachers) {
+        List<Teacher> myTeachers = new ArrayList<>(Arrays.asList(teachers));
+        // order only by date of birth
+        myTeachers.sort(Comparator.comparing(Teacher::getDateOfBirth));
+        // order by date of birth (in ascending order), then by name (in ascending order)
+        myTeachers.sort(Comparator.comparing(Teacher::getDateOfBirth).thenComparing(Teacher::getName));
+        // order by date of birth (in ascending order), then by name (in ascending order), then by rank (in descending order)
+        myTeachers.sort(Comparator.comparing(Teacher::getDateOfBirth)
+                .thenComparing(Teacher::getName)
+                .thenComparing(Teacher::getRank, Comparator.reverseOrder()));
+        return myTeachers;
+    }
 
     public static void main(String[] args) {
+
         System.out.println("listSortPrimitiveInteger ----------- " + listSortPrimitiveInteger(12, 4, 23, 7, 5, 6, 98, 4, 2, 11, 9));
         System.out.println("listSortPrimitiveStringReverse ----- " + listSortPrimitiveStringReverse("Hello", "world", "World", "hello", "this", "Is", "a", "A", "bEautiful"));
         try {
@@ -80,6 +126,15 @@ public class Comparisons101 {
                 new ComparableTeacher(3, "Paul", new Date((long) 1597413169 * 1000), 54),
                 new ComparableTeacher(7, "Rose", new Date((long) 1625256055 * 1000), 10),
                 new ComparableTeacher(76, "Sam", new Date((long) 1625256055 * 1000), 88)
+        ));
+        System.out.println("teachersListSortCustomComparator ---------- " + teachersListSortCustomComparator(
+                new Teacher(100, "John", new Date((long) 1114573964 * 1000), 65),
+                new Teacher(2, "Hank", new Date((long) 1481664991 * 1000), 4),
+                new Teacher(54, "Jean", new Date((long) 1256763291 * 1000), 23),
+                new Teacher(3, "Paul", new Date((long) 1597413169 * 1000), 54),
+                new Teacher(76, "Sam", new Date((long) 1625256055 * 1000), 88),
+                new Teacher(23, "Rose", new Date((long) 1625256055 * 1000), 1),
+                new Teacher(7, "Rose", new Date((long) 1625256055 * 1000), 10)
         ));
     }
 }
