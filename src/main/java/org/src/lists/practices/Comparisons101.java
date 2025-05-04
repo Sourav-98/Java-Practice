@@ -73,14 +73,12 @@ public class Comparisons101 {
      * @param teachers
      * @return
      */
-    static List<ComparableTeacher> comparableTeachersListSortReversed(ComparableTeacher... teachers) {
+    static List<ComparableTeacher> comparableTeachersListSort(ComparableTeacher... teachers) {
         List<ComparableTeacher> myTeachers = new ArrayList<>(Arrays.asList(teachers));
         // approach 1
-        myTeachers.sort(Collections.reverseOrder());
-        // approach 2
-        Collections.sort(myTeachers, Collections.reverseOrder());
-        // approach 3 - this by default sorts the objects, based on the dateOfBirth field, defined in compareTo()
-        myTeachers = myTeachers.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
+        Collections.sort(myTeachers);
+        // approach 2 - this by default sorts the objects, based on the dateOfBirth field, defined in compareTo()
+        myTeachers = myTeachers.stream().sorted().collect(Collectors.toList());
         return myTeachers;
     }
 
@@ -119,7 +117,7 @@ public class Comparisons101 {
         } catch (Exception e) {
             System.out.println("List<Teacher> cannot be sorted via stream() as Teacher does not implement Comparable --- " + e);
         }
-        System.out.println("comparableTeachersListSortReversed ---------- " + comparableTeachersListSortReversed(
+        System.out.println("comparableTeachersListSortReversed ---------- " + comparableTeachersListSort(
                 new ComparableTeacher(100, "John", new Date((long) 1114573964 * 1000), 65),
                 new ComparableTeacher(2, "Hank", new Date((long) 1481664991 * 1000), 4),
                 new ComparableTeacher(54, "Jean", new Date((long) 1256763291 * 1000), 23),
