@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * 1. List creation
  * 2. List sorting (with primitive types)
  * 3. List sorting (with objects)
+ * 4. unmodifiable lists
  */
 public class Lists101 {
 
@@ -151,6 +152,63 @@ public class Lists101 {
         return myStudents;
     }
 
+    /**
+     * Demonstrates the behavior of different types of {@link List} references in Java:
+     * a modifiable list, a final list, and an unmodifiable list.
+     *
+     * <p>This method:
+     * <ul>
+     *     <li>Shows that standard lists created with {@code new ArrayList<>(...)} can be modified and re-initialized.</li>
+     *     <li>Illustrates that lists declared as {@code final} can be modified (elements added/removed),
+     *         but cannot be reassigned to a new list instance.</li>
+     *     <li>Explains that lists created via {@link List#of(Object...)} are immutable — any modification attempt throws
+     *         an {@link UnsupportedOperationException} at runtime.</li>
+     * </ul>
+     *
+     * <p>Examples of list operations such as adding elements, reassigning list variables, and exception handling
+     * for immutable lists are included to clarify mutability rules in Java collections.
+     *
+     * @param args A variable number of string arguments used to initialize each list.
+     */
+    public static void listModification(String... args) {
+        // mutable list
+        List<String> myList = new ArrayList<>(Arrays.asList(args));
+
+        // immutable list - equivalent of Collections.unmodifiableList(Arrays.asList(args)); (JDK 1.2)
+        // of() introduced in Java 9
+        List<String> myUnmodifiableList = List.of(args);
+
+        // const type list
+        final List<String> myFinalList = new ArrayList<>(myList);
+
+        // Mutable list (modification allowed)
+        System.out.println("myList = " + myList);
+        myList.add("SRC Inc.");
+        System.out.println("myList modified! myList = " + myList);
+        // Mutable list (re-assignment allowed)
+        myList = new ArrayList<>(Arrays.asList("New", "World"));
+        System.out.println("myList re-init! myList = " + myList);
+
+        // Final list (modification allowed)
+        System.out.println("myFinalList = " + myFinalList);
+        myFinalList.add("SRC Inc. final");
+        System.out.println("myFinalList modified! myFinalList = " + myFinalList);
+        // Final list (re-assignment allowed) - compilation error
+        // myFinalList = new ArrayList<>();
+
+        try {
+            // Unmodifiable list (modification not allowed)
+            System.out.println("myUnmodifiableList = " + myUnmodifiableList);
+            myUnmodifiableList.add("SRC Inc. unmod insert");
+            System.out.println("myUnmodifiableList modified! myUnmodifiableList = " + myUnmodifiableList);
+            // Unmodifiable list (re-assignment allowed)
+            myUnmodifiableList = new ArrayList<>(Arrays.asList("New", "World"));
+            System.out.println("myUnmodifiableList re-init! myUnmodifiableList = " + myUnmodifiableList);
+        } catch (UnsupportedOperationException uoe) {
+            System.out.println("myUnmodifiableList modification not allowed: " + uoe);
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println("listsRunBasic ---------- " + listsRunBasic());
@@ -175,5 +233,7 @@ public class Lists101 {
                 new Student(7, "Rose", new Date((long) 1625256055 * 1000)),
                 new Student(76, "Sam", new Date((long) 1625256055 * 1000))
         ));
+        System.out.println("\n");
+        listModification("Hello", "World", "new");
     }
 }
