@@ -57,6 +57,18 @@ public class Lists101 {
     }
 
     /**
+     * Reversing the order of items in a list.
+     *
+     * @param args
+     * @return
+     */
+    public static List<String> listReverse(String... args) {
+        List<String> myList = new ArrayList<>(Arrays.asList(args));
+        Collections.reverse(myList);
+        return myList;
+    }
+
+    /**
      * Accepts a variable number of {@link Integer} arguments, sorts them in ascending order,
      * and returns the sorted list. Demonstrates multiple sorting approaches,
      * with the final sorted list returned using Java Streams.
@@ -141,11 +153,12 @@ public class Lists101 {
 
 
     public static void main(String[] args) {
-        System.out.println("listsRunBasic ---- " + listsRunBasic());
-        System.out.println("listsRun2 -------- " + listsRun2());
-        System.out.println("listsRunVarArgs -- " + listsRunVarArgs("Hello", "from", "the", "multiverses"));
-        System.out.println("listSortAsc ------ " + listSortAsc(3, 4, 2, 1, 6, 5, 4, 9, 8, 7, 2, 10));
-        System.out.println("listSortDesc ----- " + listSortDesc(3, 4, 2, 1, 6, 5, 4, 9, 8, 7, 2, 10));
+        System.out.println("listsRunBasic ---------- " + listsRunBasic());
+        System.out.println("listsRun2 -------------- " + listsRun2());
+        System.out.println("listsRunVarArgs -------- " + listsRunVarArgs("Hello", "from", "the", "multiverses"));
+        System.out.println("listReverse ------------ " + listReverse("Hello", "from", "the", "multiverses", "with", "multi", "villians"));
+        System.out.println("listSortAsc ------------ " + listSortAsc(3, 4, 2, 1, 6, 5, 4, 9, 8, 7, 2, 10));
+        System.out.println("listSortDesc ----------- " + listSortDesc(3, 4, 2, 1, 6, 5, 4, 9, 8, 7, 2, 10));
         System.out.println("studentListSortAsc ----- " + studentListSortAsc(
                 new Student(100, "John", new Date((long) 1114573964 * 1000)),
                 new Student(2, "Hank", new Date((long) 1481664991 * 1000)),
@@ -154,7 +167,7 @@ public class Lists101 {
                 new Student(76, "Sam", new Date((long) 1625256055 * 1000)),
                 new Student(7, "Rose", new Date((long) 1625256055 * 1000))
         ));
-        System.out.println("studentListSortDesc ----- " + studentListSortDesc(
+        System.out.println("studentListSortDesc ---- " + studentListSortDesc(
                 new Student(100, "John", new Date((long) 1114573964 * 1000)),
                 new Student(2, "Hank", new Date((long) 1481664991 * 1000)),
                 new Student(54, "Jean", new Date((long) 1256763291 * 1000)),
