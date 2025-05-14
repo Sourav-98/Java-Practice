@@ -4,7 +4,7 @@ import org.src.tasks.MyClassThreadTask;
 import org.src.tasks.MyRunnableThreadTask;
 import org.src.tasks.MySleepingThreadTask;
 
-public class Threads101 {
+public class ThreadsBasics {
 
     /**
      * Shows the different ways of creating threads
