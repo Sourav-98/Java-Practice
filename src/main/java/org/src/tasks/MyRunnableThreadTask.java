@@ -1,6 +1,6 @@
 package org.src.tasks;
 
-public class MyRunnableThreadTask implements Runnable{
+public class MyRunnableThreadTask implements Runnable {
 
     @Override
     public void run() {

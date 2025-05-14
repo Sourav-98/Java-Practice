@@ -4,7 +4,7 @@ import org.src.shared.api.CounterStoreAPI;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-public class AtomicCounterStore implements CounterStoreAPI {
+public class AtomicCounterStore implements CounterStoreAPI<AtomicLong> {
     private AtomicLong count;
 
     public AtomicCounterStore() {
@@ -13,7 +13,7 @@ public class AtomicCounterStore implements CounterStoreAPI {
 
     @Override
     public void increment() {
-        this.count.getAndAdd(1);
+        this.count.incrementAndGet();
     }
 
     @Override

@@ -5,16 +5,12 @@ import org.src.threads101.ThreadsBasics;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-
-    static ThreadsBasics threadsBasics = new ThreadsBasics();
-    static RacingThreads racingThreads = new RacingThreads();
-    public static void main( String[] args )
-    {
-//        threadsBasics.execute();
+public class App {
+    public static void main(String[] args) {
+        ThreadsBasics threadsBasics = new ThreadsBasics();
+        RacingThreads racingThreads = new RacingThreads();
+        threadsBasics.execute();
         racingThreads.startRace();
     }
 }

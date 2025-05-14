@@ -1,6 +1,6 @@
 package org.src.tasks;
 
-public class MySleepingThreadTask implements Runnable{
+public class MySleepingThreadTask implements Runnable {
     @Override
     public void run() {
         try {

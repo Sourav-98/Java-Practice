@@ -14,10 +14,6 @@ import org.src.shared.impl.SynchronizedCounterStore;
  */
 public class RacingThreads {
 
-    static CounterStore counterStore = new CounterStore();
-    static SynchronizedCounterStore syncCounterStore = new SynchronizedCounterStore();
-    static AtomicCounterStore atomicCounterStore = new AtomicCounterStore();
-
     static Runnable getRunnableCounter (CounterStoreAPI counterStore) {
         return () -> {
             for(int i=0; i<10000000; i++) {
@@ -28,6 +24,9 @@ public class RacingThreads {
     }
 
     public void startRace() {
+        CounterStore counterStore = new CounterStore();
+        SynchronizedCounterStore syncCounterStore = new SynchronizedCounterStore();
+        AtomicCounterStore atomicCounterStore = new AtomicCounterStore();
         // race-condition threads
         Thread t1 = new Thread(getRunnableCounter(counterStore), "Runnable Counter 1");
         Thread t2 = new Thread(getRunnableCounter(counterStore), "Runnable Counter 2");
