@@ -1,5 +1,6 @@
 package org.src.lists.practices;
 
+import org.src.lists.dto.Employee;
 import org.src.lists.dto.Student;
 
 import java.util.*;
@@ -209,6 +210,47 @@ public class Lists101 {
         }
     }
 
+    public static void practiceQuestions() {
+
+        List<Employee> employees = new LinkedList<>(Arrays.asList(
+                new Employee(1, "John", "IT", 785135),
+                new Employee(2, "Doe", "IT", 4457245),
+                new Employee(3, "Max", "DevOps", 66434),
+                new Employee(4, "Kimi", "DevOps", 674425),
+                new Employee(5, "Yuki", "Dev", 9273532),
+                new Employee(6, "George", "IT", 119823)
+        ));
+        // finding the employee with the maximum salary
+        Optional<Employee> empWithMaxSalary = employees.stream().max(Comparator.comparing(Employee::getSalary));
+        System.out.println("Employee with max salary: " + empWithMaxSalary);
+
+        try {
+            // if all emps had null salary - null comparator would not work
+            empWithMaxSalary = new LinkedList<>(Arrays.asList(
+                    new Employee(1, "John", "IT", null),
+                    new Employee(2, "Doe", "IT", null),
+                    new Employee(3, "Max", "DevOps", null),
+                    new Employee(4, "Kimi", "DevOps", null),
+                    new Employee(5, "Yuki", "Dev", 100),
+                    new Employee(6, "George", "IT", null)
+            )).stream().max((a, b) -> {
+                if (a.getSalary() == null && b.getSalary() == null) {
+                    return 0;
+                } else if (a.getSalary() == null) {
+                    return -1;
+                } else if (b.getSalary() == null) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+
+            System.out.println("Employee with max salary: " + empWithMaxSalary);
+        } catch (NullPointerException npe) {
+            System.out.println("Null pointer caught!: " + npe);
+        }
+
+    }
 
     public static void main(String[] args) {
         System.out.println("listsRunBasic ---------- " + listsRunBasic());
@@ -235,5 +277,10 @@ public class Lists101 {
         ));
         System.out.println("\n");
         listModification("Hello", "World", "new");
+
+        List<Integer> n = new ArrayList<>(Arrays.asList(2, 4, 5, 1, 6, 5, 3, 7, 10, 90, 6, 7, 6, 90, 90, 98887, 98887));
+        Optional<Map.Entry<Integer, Long>> mm = n.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting())).entrySet()
+                .stream().filter((s) -> s.getValue() == 3).max(Comparator.comparingInt(s -> s.getKey()));
+        System.out.println(mm);
     }
 }
