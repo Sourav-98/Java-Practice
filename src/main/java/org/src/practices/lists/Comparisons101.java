@@ -1,4 +1,4 @@
-package org.src.lists.practices;
+package org.src.practices.lists;
 
 import org.src.dto.ComparableTeacher;
 import org.src.dto.Teacher;

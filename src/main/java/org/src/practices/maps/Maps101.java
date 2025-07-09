@@ -1,4 +1,4 @@
-package org.src.maps.practices;
+package org.src.practices.maps;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -99,7 +99,6 @@ public class Maps101 {
         map1.putIfAbsent(3, 827473);
         map1.putIfAbsent(34, 893754);
         System.out.println("Updated map1 contents: " + map1);
-
 
     }
 
