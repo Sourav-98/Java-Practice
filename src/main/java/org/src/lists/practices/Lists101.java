@@ -1,7 +1,7 @@
 package org.src.lists.practices;
 
-import org.src.lists.dto.Employee;
-import org.src.lists.dto.Student;
+import org.src.dto.Employee;
+import org.src.dto.Student;
 
 import java.util.*;
 import java.util.stream.Collectors;

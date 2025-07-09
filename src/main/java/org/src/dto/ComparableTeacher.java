@@ -1,4 +1,4 @@
-package org.src.lists.dto;
+package org.src.dto;
 
 import java.util.Date;
 

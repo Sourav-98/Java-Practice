@@ -1,7 +1,7 @@
 package org.src.lists.practices;
 
-import org.src.lists.dto.ComparableTeacher;
-import org.src.lists.dto.Teacher;
+import org.src.dto.ComparableTeacher;
+import org.src.dto.Teacher;
 
 import java.util.*;
 import java.util.stream.Collectors;
