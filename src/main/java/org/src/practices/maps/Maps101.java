@@ -1,5 +1,9 @@
 package org.src.practices.maps;
 
+import org.src.dto.Employee;
+import org.src.dto.FullCollisionEmployee;
+import org.src.dto.HashCollisionEmployee;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,7 +106,55 @@ public class Maps101 {
 
     }
 
+    static void mapHashCollision() {
+        // key collision while inserting String keys with same hashCode, results in the checking of equals() criteria
+        // e.g.
+        Map<String, Integer> collisionProneMap = new HashMap<>();
+        System.out.println("\"FB\" and \"Ea\" have the same hash codes (2236): " + "FB".hashCode() + " " + "Ea".hashCode());
+        collisionProneMap.put("FB", 4);
+        collisionProneMap.put("Ea", 19);
+        System.out.println("Hash codes collide, but the values are separate (FB != Ea). Hence, both values are separate: " + collisionProneMap);
+
+        // key collision while inserting object type keys
+        // e.g.
+        HashCollisionEmployee emp1 = new HashCollisionEmployee(1, "John", "IT", 785135);
+        HashCollisionEmployee emp2 = new HashCollisionEmployee(2, "Doe", "DEVOPS", 34635235);
+        Map<HashCollisionEmployee, Integer> collMap1 = new HashMap<>() {{
+            put(emp1, 123);
+            put(emp2, 44);
+        }};
+        System.out.println("\ncollMap1 contents: " + collMap1);
+
+        // here, femp1 is inserted first. but when femp2 is added, the key is considered the same as that of femp1
+        // because hashCode() -> 0 always & femp1.equals(femp2) -> true always.
+        // the value now becomes 44
+        FullCollisionEmployee femp1 = new FullCollisionEmployee(1, "John", "IT", 785135);
+        FullCollisionEmployee femp2 = new FullCollisionEmployee(2, "Doe", "DEVOPS", 34635235);
+        Map<FullCollisionEmployee, Integer> collMap2 = new HashMap<>() {{
+            put(femp1, 123);
+            put(femp2, 44);
+        }};
+        System.out.println("\ncollMap2 contents: " + collMap2);
+
+        // Keys must be immutable always!
+        // What if an object was inserted into the map, and later its values were changed?
+        // Map will internally fail to perform a lookup
+        Employee e2 = new Employee(1, "John", "IT", 785135);
+        Map<Employee, String> m1 = new HashMap<>() {{
+            put(e2, "Hello World");
+        }};
+        System.out.println("\nm1 contents: " + m1);
+        // this must not be allowed!
+        e2.setDepartment("Services");
+        System.out.println(m1.get(e2));
+        System.out.println("m1 contents after employee mod: " + m1);
+        // if this updated object is inserted into the map
+        m1.put(e2, "To a new world!");
+        System.out.println("m1 contents after re-insertion: " + m1);
+    }
+
     public static void main(String[] args) {
         mapsBasics();
+        mapHashCollision();
     }
 }
