@@ -1,5 +1,6 @@
 package org.src.challenges;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -22,14 +23,50 @@ public class TreeProblems {
             viewQueue.add(root);
         }
         while (!viewQueue.isEmpty()) {
-            Node current = viewQueue.poll();
-            if (current.left != null) {
-                viewQueue.add(current.left);
+            int treeSize = viewQueue.size();
+            for (int i = 0; i < treeSize; i++) {
+                Node current = viewQueue.poll();
+                if (current.left != null) {
+                    viewQueue.add(current.left);
+                }
+                if (current.right != null) {
+                    viewQueue.add(current.right);
+                }
+                System.out.println(current.data);
             }
-            if (current.right != null) {
-                viewQueue.add(current.right);
+        }
+    }
+
+    static void levelOrderZigZag(Node root) {
+        System.out.println("\n Level-Order Zig-Zag: ");
+        Deque<Node> viewQueue = new LinkedList<>();
+        if (root != null) {
+            viewQueue.add(root);
+        }
+        boolean zigZag = false;
+        while (!viewQueue.isEmpty()) {
+            int treeSize = viewQueue.size();
+            for (int i = 0; i < treeSize; i++) {
+                Node current = viewQueue.poll();
+                if (zigZag) {
+                    if (current.right != null) {
+                        viewQueue.add(current.right);
+                    }
+                    if (current.left != null) {
+                        viewQueue.add(current.left);
+                    }
+                } else {
+                    if (current.left != null) {
+                        viewQueue.add(current.left);
+                    }
+                    if (current.right != null) {
+                        viewQueue.add(current.right);
+                    }
+                }
+
+                System.out.print(current.data + " ");
             }
-            System.out.println(current.data);
+            zigZag = !zigZag;
         }
     }
 
@@ -94,6 +131,7 @@ public class TreeProblems {
         );
 
         levelOrder(root);
+        levelOrderZigZag(root);
         System.out.println("\n Pre-Order: ");
         preOrderTraversal(root);
         System.out.println("\n Post-Order: ");

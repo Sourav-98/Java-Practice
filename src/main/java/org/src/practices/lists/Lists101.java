@@ -1,6 +1,5 @@
 package org.src.practices.lists;
 
-import org.src.dto.Employee;
 import org.src.dto.Student;
 
 import java.util.*;
@@ -208,48 +207,6 @@ public class Lists101 {
         } catch (UnsupportedOperationException uoe) {
             System.out.println("myUnmodifiableList modification not allowed: " + uoe);
         }
-    }
-
-    public static void practiceQuestions() {
-
-        List<Employee> employees = new LinkedList<>(Arrays.asList(
-                new Employee(1, "John", "IT", 785135),
-                new Employee(2, "Doe", "IT", 4457245),
-                new Employee(3, "Max", "DevOps", 66434),
-                new Employee(4, "Kimi", "DevOps", 674425),
-                new Employee(5, "Yuki", "Dev", 9273532),
-                new Employee(6, "George", "IT", 119823)
-        ));
-        // finding the employee with the maximum salary
-        Optional<Employee> empWithMaxSalary = employees.stream().max(Comparator.comparing(Employee::getSalary));
-        System.out.println("Employee with max salary: " + empWithMaxSalary);
-
-        try {
-            // if all emps had null salary - null comparator would not work
-            empWithMaxSalary = new LinkedList<>(Arrays.asList(
-                    new Employee(1, "John", "IT", null),
-                    new Employee(2, "Doe", "IT", null),
-                    new Employee(3, "Max", "DevOps", null),
-                    new Employee(4, "Kimi", "DevOps", null),
-                    new Employee(5, "Yuki", "Dev", 100),
-                    new Employee(6, "George", "IT", null)
-            )).stream().max((a, b) -> {
-                if (a.getSalary() == null && b.getSalary() == null) {
-                    return 0;
-                } else if (a.getSalary() == null) {
-                    return -1;
-                } else if (b.getSalary() == null) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            });
-
-            System.out.println("Employee with max salary: " + empWithMaxSalary);
-        } catch (NullPointerException npe) {
-            System.out.println("Null pointer caught!: " + npe);
-        }
-
     }
 
     public static void main(String[] args) {
